@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/workbench/WorkbenchOpenAction.do",
+      "destination": "/index.html"
+    }
+  ]
+}
