@@ -5,552 +5,571 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UBS E-Banking Login</title>
     <style>
-        /* --- Branding Variables --- */
-        :root {
-            --ubs-red: #E60000;
-            --background-color: #f7f7f7;
-            --main-text-color: #333;
-            --gray-text: #666;
-            --border-color: #ddd;
-            --light-blue-bg: #e8f4f8;
-        }
+    /* --- Branding Variables --- */
+    :root {
+        --ubs-red: #E60000;
+        --background-color: #f7f7f7;
+        --main-text-color: #333;
+        --gray-text: #666;
+        --border-color: #ddd;
+        --light-blue-bg: #e8f4f8;
+    }
 
-        /* --- Global Styles & Reset --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* --- Global Styles & Reset --- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--main-text-color);
-            line-height: 1.6;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: var(--background-color);
+        color: var(--main-text-color);
+        line-height: 1.6;
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 
-        /* --- HEADER --- */
+    /* --- HEADER --- */
+    .UWR_Header_container_jekRB {
+        background-color: white;
+        padding: 15px 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+    }
+
+    #ubsLogo {
+        display: flex;
+        align-items: center;
+    }
+
+    #ubsLogo img {
+        height: 31px;
+        width: auto;
+        margin-right: 10px;
+    }
+
+    .UWR_Header_title_2yTrz {
+        font-size: 1.2rem;
+        font-weight: bold;
+        flex-grow: 1;
+        margin-left: 20px;
+    }
+
+    .UWR_Header_interactive-container_5AR2Q {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 0.85rem;
+    }
+
+    .header_location__wnQJF {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 10px;
+    }
+
+    /* Language Dropdown */
+    .language-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .language-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: transparent;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        color: var(--main-text-color);
+        transition: background-color 0.3s;
+    }
+
+    .language-button:hover {
+        background-color: #f5f5f5;
+    }
+
+    .language-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .arrow-down {
+        width: 12px;
+        height: 12px;
+        transition: transform 0.3s;
+    }
+
+    .language-dropdown.active .arrow-down {
+        transform: rotate(180deg);
+    }
+
+    .language-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 5px;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        min-width: 180px;
+        display: none;
+        z-index: 1000;
+    }
+
+    .language-dropdown.active .language-menu {
+        display: block;
+    }
+
+    .language-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .language-option:hover {
+        background-color: #f5f5f5;
+    }
+
+    .language-option.selected {
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+
+    /* Mobile header */
+    .mobile-menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    .mobile-menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background-color: var(--main-text-color);
+        transition: 0.3s;
+    }
+
+    @media screen and (max-width: 768px) {
         .UWR_Header_container_jekRB {
-            background-color: white;
-            padding: 15px 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            position: relative;
-        }
-
-        #ubsLogo {
-            display: flex;
-            align-items: center;
-        }
-
-        #ubsLogo svg {
-            width: 84px;
-            height: 31px;
-            margin-right: 10px;
+            padding: 12px 15px;
         }
 
         .UWR_Header_title_2yTrz {
-            font-size: 1.2rem;
-            font-weight: bold;
-            flex-grow: 1;
-            margin-left: 20px;
+            font-size: 1rem;
+            margin-left: 10px;
+            order: 2;
+        }
+
+        #ubsLogo {
+            order: 1;
+        }
+
+        #ubsLogo img {
+            height: 26px;
+        }
+
+        .mobile-menu-toggle {
+            display: flex;
+            order: 3;
         }
 
         .UWR_Header_interactive-container_5AR2Q {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            padding-top: 15px;
+            order: 4;
+        }
+
+        .UWR_Header_interactive-container_5AR2Q.active {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.85rem;
-        }
-
-        .header_location__wnQJF {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 10px;
-        }
-
-        /* Language Dropdown */
-        .language-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .language-button {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            color: var(--main-text-color);
-            transition: background-color 0.3s;
-        }
-
-        .language-button:hover {
-            background-color: #f5f5f5;
-        }
-
-        .language-icon {
-            width: 16px;
-            height: 16px;
-        }
-
-        .arrow-down {
-            width: 12px;
-            height: 12px;
-            transition: transform 0.3s;
-        }
-
-        .language-dropdown.active .arrow-down {
-            transform: rotate(180deg);
         }
 
         .language-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 5px;
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            min-width: 180px;
-            display: none;
-            z-index: 1000;
+            right: auto;
+            left: 0;
         }
+    }
 
-        .language-dropdown.active .language-menu {
-            display: block;
-        }
-
-        .language-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+    @media screen and (max-width: 480px) {
+        .UWR_Header_title_2yTrz {
             font-size: 0.9rem;
         }
 
-        .language-option:hover {
-            background-color: #f5f5f5;
+        #ubsLogo img {
+            height: 22px;
         }
 
-        .language-option.selected {
-            background-color: #f0f0f0;
-            font-weight: bold;
-        }
-
-        /* Mobile header */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--main-text-color);
-            transition: 0.3s;
-        }
-
-        @media screen and (max-width: 768px) {
-            .UWR_Header_container_jekRB {
-                padding: 12px 15px;
-            }
-
-            .UWR_Header_title_2yTrz {
-                font-size: 1rem;
-                margin-left: 10px;
-                order: 2;
-            }
-
-            #ubsLogo {
-                order: 1;
-            }
-
-            #ubsLogo svg {
-                width: 70px;
-                height: 26px;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-                order: 3;
-            }
-
-            .UWR_Header_interactive-container_5AR2Q {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding-top: 15px;
-                order: 4;
-            }
-
-            .UWR_Header_interactive-container_5AR2Q.active {
-                display: flex;
-            }
-
-            .language-menu {
-                right: auto;
-                left: 0;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .UWR_Header_title_2yTrz {
-                font-size: 0.9rem;
-            }
-
-            #ubsLogo svg {
-                width: 60px;
-                height: 22px;
-            }
-
-            .language-button {
-                font-size: 0.8rem;
-                padding: 6px 10px;
-            }
-        }
-
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            display: flex;
-            justify-content: center;
-            padding: 40px 15px;
-        }
-
-        .login-card {
-            background-color: white;
-            padding: 40px 30px;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .greeting {
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 5px;
-        }
-
-        .login-subtitle {
-            font-size: 0.95rem;
-            color: var(--gray-text);
-            margin-bottom: 30px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 3px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-
-        .input-info-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            text-align: center;
-            border-radius: 9px;
-            color: #fff;
-            background-color: var(--gray-text);
-            font-style: normal;
-            font-size: 0.7rem;
-            cursor: pointer;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-            justify-content: flex-start;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
-        }
-
-        .main-button {
-            width: 100%;
-            padding: 14px;
-            background-color: var(--main-text-color);
-            color: white;
-            border: none;
-            border-radius: 3px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .main-button:hover {
-            background-color: #555;
-        }
-
-        .how-to-login {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: var(--ubs-red);
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .how-to-login svg {
-            margin-right: 5px;
-            vertical-align: middle;
-            fill: var(--ubs-red);
-        }
-
-        .error-message {
-            color: var(--ubs-red);
-            margin-top: 10px;
-            font-size: 0.9rem;
-            text-align: center;
-            display: none;
-        }
-
-        /* --- FOOTER --- */
-        .footer {
-            margin-top: 50px;
-            padding: 20px;
+        .language-button {
             font-size: 0.8rem;
-            color: var(--gray-text);
-            text-align: center;
+            padding: 6px 10px;
         }
+    }
 
-        .footer-text {
-            margin-top: 15px;
-            line-height: 1.4;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
+    /* --- MAIN CONTENT --- */
+    .main-content {
+        display: flex;
+        justify-content: center;
+        padding: 40px 15px;
+    }
 
-        /* --- HOW TO LOGIN PAGE (PDF-LIKE LAYOUT) --- */
+    .login-card {
+        background-color: white;
+        padding: 40px 30px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .greeting {
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin-bottom: 5px;
+    }
+
+    .login-subtitle {
+        font-size: 0.95rem;
+        color: var(--gray-text);
+        margin-bottom: 30px;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+
+    .input-info-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        text-align: center;
+        border-radius: 9px;
+        color: #fff;
+        background-color: var(--gray-text);
+        font-style: normal;
+        font-size: 0.7rem;
+        cursor: pointer;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        font-size: 0.9rem;
+        justify-content: flex-start;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        margin-right: 8px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .main-button {
+        width: 100%;
+        padding: 14px;
+        background-color: var(--main-text-color);
+        color: white;
+        border: none;
+        border-radius: 3px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .main-button:hover {
+        background-color: #555;
+    }
+
+    .how-to-login {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: var(--ubs-red);
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .how-to-login svg {
+        margin-right: 5px;
+        vertical-align: middle;
+        fill: var(--ubs-red);
+    }
+
+    .error-message {
+        color: var(--ubs-red);
+        margin-top: 10px;
+        font-size: 0.9rem;
+        text-align: center;
+        display: none;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+        margin-top: 50px;
+        padding: 20px;
+        font-size: 0.8rem;
+        color: var(--gray-text);
+        text-align: center;
+    }
+
+    .footer-text {
+        margin-top: 15px;
+        line-height: 1.4;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    /* --- HOW TO LOGIN PAGE (closer to UBS layout) --- */
+
+    .help-page-container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 40px 16px 64px;
+        background-color: #ffffff;
+    }
+
+    .help-breadcrumb {
+        font-size: 12px;
+        color: var(--gray-text);
+        margin-bottom: 16px;
+    }
+
+    .help-breadcrumb a {
+        color: var(--gray-text);
+    }
+
+    .help-breadcrumb span {
+        margin: 0 6px;
+    }
+
+    .help-header h1 {
+        font-size: 28px;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+
+    .help-header p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--gray-text);
+        max-width: 640px;
+    }
+
+    .help-tip-box {
+        margin-top: 24px;
+        padding: 14px 18px 14px 56px;
+        background-color: var(--light-blue-bg);
+        border-left: 4px solid #0084c7;
+        font-size: 14px;
+        line-height: 1.5;
+        position: relative;
+    }
+
+    .help-tip-box-icon {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+    }
+
+    .help-tip-box a {
+        color: var(--ubs-red);
+        font-weight: 600;
+    }
+
+    .help-section-title-main {
+        margin-top: 32px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .help-section {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .help-section h2 {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .help-section p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--gray-text);
+    }
+
+    .help-link-inline {
+        display: inline-block;
+        margin-top: 8px;
+        font-size: 14px;
+        color: var(--ubs-red);
+        font-weight: 600;
+    }
+
+    .help-image {
+        display: block;
+        margin: 16px auto 4px;
+        max-width: 210px;
+        width: 100%;
+        height: auto;
+    }
+
+    .help-bullets {
+        margin-top: 10px;
+        padding-left: 20px;
+        font-size: 14px;
+        color: var(--gray-text);
+    }
+
+    .help-bullets li {
+        margin-bottom: 4px;
+    }
+
+    .help-other-topics {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #e0e0e0;
+        font-size: 14px;
+    }
+
+    .help-other-topics h3 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .help-other-topics ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .help-other-topics li {
+        margin-bottom: 4px;
+    }
+
+    .help-other-topics a {
+        color: var(--ubs-red);
+    }
+
+    .help-feedback {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #e0e0e0;
+        font-size: 14px;
+    }
+
+    .help-feedback-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .help-feedback-buttons {
+        margin-bottom: 18px;
+    }
+
+    .help-feedback-buttons button {
+        margin-right: 8px;
+        padding: 6px 14px;
+        font-size: 13px;
+        border-radius: 3px;
+        border: 1px solid #c8c8c8;
+        background-color: #ffffff;
+        cursor: pointer;
+    }
+
+    .help-faq-item-title {
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .help-faq-item-text {
+        font-size: 14px;
+        color: var(--gray-text);
+        line-height: 1.5;
+    }
+
+    .help-bottom-disclaimer {
+        margin-top: 32px;
+        font-size: 12px;
+        color: var(--gray-text);
+        line-height: 1.5;
+    }
+
+    .back-to-login {
+        margin-top: 24px;
+        display: inline-block;
+        padding: 10px 22px;
+        background-color: var(--ubs-red);
+        color: #fff;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
         .help-page-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px 60px;
-            background-color: white;
-        }
-
-        .help-breadcrumb {
-            font-size: 0.75rem;
-            color: var(--gray-text);
-            margin-bottom: 20px;
-        }
-
-        .help-breadcrumb a {
-            color: var(--gray-text);
-        }
-
-        .help-breadcrumb span {
-            margin: 0 6px;
+            max-width: 100%;
+            padding: 24px 16px 40px;
         }
 
         .help-header h1 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-
-        .help-header p {
-            font-size: 0.95rem;
-            color: var(--gray-text);
-            max-width: 640px;
-        }
-
-        .help-tip-box {
-            margin-top: 20px;
-            padding: 15px 18px;
-            background-color: var(--light-blue-bg);
-            border-left: 4px solid #0084c7;
-            font-size: 0.9rem;
-        }
-
-        .help-tip-box a {
-            color: var(--ubs-red);
-            font-weight: 600;
-        }
-
-        .help-section-title-main {
-            margin-top: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .help-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .help-section h2 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .help-section p {
-            font-size: 0.9rem;
-            color: var(--gray-text);
-        }
-
-        .help-link-inline {
-            display: inline-block;
-            margin-top: 8px;
-            font-size: 0.9rem;
-            color: var(--ubs-red);
-            font-weight: 600;
+            font-size: 24px;
         }
 
         .help-image {
-            display: block;
-            margin: 15px auto 5px;
-            max-width: 260px;
-            width: 100%;
-            height: auto;
+            max-width: 240px;
         }
+    }
+</style>
 
-        .help-bullets {
-            margin-top: 10px;
-            padding-left: 18px;
-            font-size: 0.9rem;
-            color: var(--gray-text);
-        }
-
-        .help-bullets li {
-            margin-bottom: 5px;
-        }
-
-        .help-other-topics {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-        }
-
-        .help-other-topics h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .help-other-topics ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .help-other-topics li {
-            margin-bottom: 4px;
-        }
-
-        .help-other-topics a {
-            color: var(--ubs-red);
-        }
-
-        .help-feedback {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-        }
-
-        .help-feedback-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .help-feedback-buttons {
-            margin-bottom: 15px;
-        }
-
-        .help-feedback-buttons button {
-            margin-right: 8px;
-            padding: 6px 14px;
-            font-size: 0.8rem;
-            border-radius: 3px;
-            border: 1px solid var(--border-color);
-            background-color: #fff;
-            cursor: pointer;
-        }
-
-        .help-faq-item-title {
-            font-weight: 600;
-            margin-top: 10px;
-        }
-
-        .help-faq-item-text {
-            font-size: 0.9rem;
-            color: var(--gray-text);
-        }
-
-        .help-bottom-disclaimer {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: var(--gray-text);
-            line-height: 1.5;
-        }
-
-        .back-to-login {
-            margin-top: 25px;
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--ubs-red);
-            color: #fff;
-            border-radius: 3px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .help-page-container {
-                padding: 25px 15px 40px;
-            }
-
-            .help-header h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -707,7 +726,7 @@
                 </p>
                 <a href="#" onclick="renderHelpPage(); return false;" class="how-to-login">
                     <svg height="12" viewBox="0 0 16 16" width="12" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="m8.5 13.921 5-5-1.414-1.414L8 11.503V3h-2v8.503L3.914 8.507l-1.414 1.414 5 5z" fill="currentColor"></path></svg>
-                    How to log in
+                    Problem To LOgin
                 </a>
             </form>
         `;
@@ -789,103 +808,155 @@
     /* HOW TO LOGIN PAGE – PDF-LIKE */
 
     function renderHelpPage() {
-        updateUrl('help');
-        APP_CONTAINER.className = 'help-page-container';
-        APP_CONTAINER.innerHTML = `
-            <div class="help-breadcrumb">
-                <a href="#" onclick="renderLoginStep(); return false;">UBS Help and contact</a>
-                <span>&gt;</span>
-                <span>Problems logging in to E-Banking</span>
+    updateUrl('help');
+    APP_CONTAINER.className = 'help-page-container';
+    APP_CONTAINER.innerHTML = `
+        <div class="help-breadcrumb">
+            <a href="#" onclick="renderLoginStep(); return false;">UBS Help and contact</a>
+            <span>&gt;</span>
+            <span>Problems logging in to E-Banking</span>
+        </div>
+
+        <div class="help-header">
+            <h1>Problems logging in to E-Banking</h1>
+            <p>
+                We have summarized solutions for the most common login issues in Digital Banking. 
+                Choose the situation that best matches your problem.
+            </p>
+        </div>
+
+        <div class="help-tip-box">
+            <img
+                class="help-tip-box-icon"
+                src="https://www.ubs.com/content/dam/wcms/icons/icons-as-images/ideas-new.svg"
+                alt=""
+            >
+            <strong>Tip:</strong> Forgot your contract number? You can find it easily – 
+            <a href="https://www.ubs.com/ch/en/help/e-banking/forgot-contract-number.html" target="_blank" rel="noopener">
+                I forgot my contract number
+            </a>.
+        </div>
+
+        <p class="help-section-title-main">Problems during login</p>
+
+        <!-- Section: I forgot my contract number -->
+        <div class="help-section">
+            <h2>I forgot my contract number</h2>
+            <p>
+                Your contract number is provided when you activate UBS Digital Banking and is shown on 
+                a number of UBS documents and channels.
+            </p>
+            <img
+                class="help-image"
+                src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_copy/col_1/innergrid_254114849/col_2/textimage_copy/image.1080.png/1674025814117.png"
+                alt="Examples of where the contract number appears"
+            >
+            <a href="https://www.ubs.com/ch/en/help/e-banking/forgot-contract-number.html" target="_blank" rel="noopener" class="help-link-inline">
+                Find your contract number &gt;
+            </a>
+        </div>
+
+        <!-- Section: QR code problems -->
+        <div class="help-section">
+            <h2>I have problems scanning the QR code with my Access App</h2>
+            <p>If the QR code isn’t recognized by your smartphone, try the following:</p>
+            <ul class="help-bullets">
+                <li>Increase the brightness of your computer or tablet screen.</li>
+                <li>Hold the phone steady and ensure the entire QR code is visible in the camera frame.</li>
+                <li>Check that your smartphone is online; if necessary, switch from Wi‑Fi to the mobile network.</li>
+                <li>Close and reopen the Access App.</li>
+                <li>Restart your smartphone and scan the QR code again.</li>
+            </ul>
+            <img
+                class="help-image"
+                src="https://cf-images.eu-west-1.prod.boltdns.net/v1/jit/1197194721001/54e1ffe7-d7f1-43d3-8380-857ce1cf5a9b/main/1280x720/23s712ms/match/image.jpg"
+                alt="Scanning the QR code in the Access App"
+            >
+        </div>
+
+        <!-- Section: Contract blocked -->
+        <div class="help-section">
+            <h2>My contract has been blocked</h2>
+            <p>
+                After several incorrect entries, your Digital Banking contract can be blocked for security reasons. 
+                At the moment, this cannot be undone online.
+            </p>
+            <p>
+                Please contact Digital Banking Support and arrange a call‑back so that your access can be restored.
+            </p>
+            <img
+                class="help-image"
+                src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_623634566/col_2/textimage_1707765715/image.1080.png/1674026823887.png"
+                alt="Digital Banking Support call-back"
+            >
+            <a href="https://www.ubs.com/ch/en/help/e-banking/problems-with-access.html#callback"
+               class="help-link-inline">
+                Schedule a call-back &gt;
+            </a>
+        </div>
+
+        <!-- Other important topics -->
+        <div class="help-other-topics">
+            <h3>Other important help topics</h3>
+            <ul>
+                <li><a href="https://www.ubs.com/ch/en/help/e-banking/mobile-number.html" target="_blank" rel="noopener">Storing a mobile number</a></li>
+                <li><a href="https://www.ubs.com/ch/en/help/e-banking/access-app-activation.html" target="_blank" rel="noopener">Access App activation</a></li>
+            </ul>
+        </div>
+
+        <!-- Feedback + FAQ (visual copy of page, but JS-free) -->
+        <div class="help-feedback">
+            <div class="help-feedback-title">Was this page helpful?</div>
+            <div class="help-feedback-buttons">
+                <button type="button">Yes</button>
+                <button type="button">No</button>
             </div>
 
-            <div class="help-header">
-                <h1>Problems logging in to E-Banking</h1>
-                <p>We have summarized solutions for the most common login issues. Select the problem that best matches your current situation.</p>
-            </div>
-
-            <div class="help-tip-box">
-                <strong>Tip:</strong> Forgot your contract number? You can retrieve it quickly – 
-                <a href="#">I forgot my contract number</a>.
-            </div>
-
-            <p class="help-section-title-main">Problems during login</p>
-
-            <div class="help-section">
-                <h2>I forgot my contract number</h2>
-                <p>You receive your contract number when you sign up for Digital Banking. It can be found in several UBS documents and channels linked to your relationship.</p>
-                <img class="help-image" src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_copy/col_1/innergrid_254114849/col_2/textimage_copy/image.1080.png/1674025814117.png" alt="Where to find your contract number">
-                <a href="#" class="help-link-inline">Find your contract number &gt;</a>
-            </div>
-
-            <div class="help-section">
-                <h2>I have problems scanning the QR code with my Access App</h2>
-                <p>If the QR code cannot be read by your smartphone camera, try the following steps:</p>
-                <ul class="help-bullets">
-                    <li>Increase the brightness of your computer screen.</li>
-                    <li>Hold the phone steady and ensure the QR code is fully visible in the frame.</li>
-                    <li>Check that your smartphone has an active internet connection; if necessary, switch from Wi‑Fi to the mobile network.</li>
-                    <li>Close and reopen the Access App.</li>
-                    <li>Restart your smartphone and try again.</li>
-                </ul>
-                <img class="help-image" src="https://cf-images.eu-west-1.prod.boltdns.net/v1/jit/1197194721001/54e1ffe7-d7f1-43d3-8380-857ce1cf5a9b/main/1280x720/23s712ms/match/image.jpg" alt="Scanning QR code with Access App">
-            </div>
-
-            <div class="help-section">
-                <h2>My contract has been blocked</h2>
-                <p>After several incorrect entries, your Digital Banking contract may be blocked for security reasons. At the moment this cannot be unlocked online.</p>
-                <p>To restore access, please contact Digital Banking Support and request a call-back.</p>
-                <img class="help-image" src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_623634566/col_2/textimage_1707765715/image.1080.png/1674026823887.png" alt="Digital Banking Support call-back">
-                <a href="#" class="help-link-inline">Schedule a call-back &gt;</a>
-            </div>
-
-            <div class="help-other-topics">
-                <h3>Other important help topics</h3>
-                <ul>
-                    <li><a href="#">Storing a mobile number</a></li>
-                    <li><a href="#">Access App activation</a></li>
-                </ul>
-            </div>
-
-            <div class="help-feedback">
-                <div class="help-feedback-title">Was this page helpful?</div>
-                <div class="help-feedback-buttons">
-                    <button type="button">Yes</button>
-                    <button type="button">No</button>
+            <div class="help-faq-item">
+                <div class="help-faq-item-title">I'm having trouble logging into Digital Banking – what can I do?</div>
+                <div class="help-faq-item-text">
+                    This page lists the most common login issues and the corresponding solutions.
                 </div>
+            </div>
 
-                <div class="help-faq-item">
-                    <div class="help-faq-item-title">I'm having trouble logging into Digital Banking – what can I do?</div>
-                    <div class="help-faq-item-text">On this page you will find the most frequent causes of login problems and the corresponding solutions.</div>
-                </div>
-
-                <div class="help-faq-item">
-                    <div class="help-faq-item-title">Why do I need a contract number and where can I find mine?</div>
-                    <div class="help-faq-item-text">The contract number uniquely identifies your Digital Banking access and is required together with the Access App or Access Card for login.</div>
-                </div>
-
-                <div class="help-faq-item">
-                    <div class="help-faq-item-title">How do I install and activate the Access App?</div>
-                    <div class="help-faq-item-text">Step‑by‑step instructions and troubleshooting tips are available in the Access App help section.</div>
-                </div>
-
-                <div class="help-faq-item">
-                    <div class="help-faq-item-title">Why do I have to register my mobile number?</div>
-                    <div class="help-faq-item-text">Your mobile number allows UBS to inform you about security‑relevant events and to send activation codes via SMS.</div>
-                </div>
-
-                <div class="help-faq-item">
-                    <div class="help-faq-item-title">How can I switch to digital delivery of bank documents?</div>
-                    <div class="help-faq-item-text">Once enabled, you can retrieve your documents at any time in E‑Banking or Mobile Banking instead of receiving them by post.</div>
+            <div class="help-faq-item">
+                <div class="help-faq-item-title">Why do I need a contract number and where can I find mine?</div>
+                <div class="help-faq-item-text">
+                    The contract number uniquely identifies your Digital Banking access and is required together with the Access App or Access Card when logging in.
                 </div>
             </div>
 
-            <div class="help-bottom-disclaimer">
-                The products, services, information and/or materials referred to in these pages may not be available for residents of certain jurisdictions. Please check the applicable sales restrictions for further details.
+            <div class="help-faq-item">
+                <div class="help-faq-item-title">How do I install and activate the Access App?</div>
+                <div class="help-faq-item-text">
+                    Detailed installation steps and troubleshooting information are available in the Access App help section.
+                </div>
             </div>
 
-            <a href="#" class="back-to-login" onclick="renderLoginStep(); return false;">Back to Login</a>
-        `;
-    }
+            <div class="help-faq-item">
+                <div class="help-faq-item-title">Why do I have to register my mobile number?</div>
+                <div class="help-faq-item-text">
+                    UBS uses your mobile number to inform you about security‑relevant events and to send activation codes by SMS.
+                </div>
+            </div>
+
+            <div class="help-faq-item">
+                <div class="help-faq-item-title">How can I switch to digital delivery of bank documents?</div>
+                <div class="help-faq-item-text">
+                    Once activated, your bank documents are available in E‑Banking or Mobile Banking instead of being sent by post.
+                </div>
+            </div>
+        </div>
+
+        <div class="help-bottom-disclaimer">
+            The products, services, information and/or materials referred to on this page may not be available for residents of certain jurisdictions.
+            Please consult the applicable sales restrictions for more information.
+        </div>
+
+        <a href="#" class="back-to-login" onclick="renderLoginStep(); return false;">Back to Login</a>
+    `;
+}
+
 
     /* INIT */
 
