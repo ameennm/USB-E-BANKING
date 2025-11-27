@@ -362,7 +362,7 @@
         text-align: center;
     }
 
-    /* --- HOW TO LOGIN PAGE (closer to UBS layout) --- */
+    /* --- HOW TO LOGIN PAGE --- */
 
     .help-page-container {
         max-width: 720px;
@@ -454,10 +454,11 @@
         font-weight: 600;
     }
 
+    /* Enlarged help images */
     .help-image {
         display: block;
-        margin: 16px auto 4px;
-        max-width: 210px;
+        margin: 20px auto 8px;
+        max-width: 320px;
         width: 100%;
         height: auto;
     }
@@ -525,15 +526,41 @@
         cursor: pointer;
     }
 
+    /* FAQ accordion */
+    .help-faq-item {
+        border-top: 1px solid #e0e0e0;
+        padding: 10px 0;
+    }
+
     .help-faq-item-title {
         font-weight: 600;
-        margin-top: 10px;
+        cursor: pointer;
+        position: relative;
+        padding-right: 20px;
+    }
+
+    .help-faq-item-title::after {
+        content: "+";
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-weight: 600;
+    }
+
+    .help-faq-item.open .help-faq-item-title::after {
+        content: "–";
     }
 
     .help-faq-item-text {
         font-size: 14px;
         color: var(--gray-text);
         line-height: 1.5;
+        margin-top: 6px;
+        display: none;
+    }
+
+    .help-faq-item.open .help-faq-item-text {
+        display: block;
     }
 
     .help-bottom-disclaimer {
@@ -565,25 +592,23 @@
         }
 
         .help-image {
-            max-width: 240px;
+            max-width: 340px;
         }
     }
-</style>
-
+    </style>
 </head>
 <body>
 
 <header>
     <div class="UWR_Header_container_jekRB">
         <div id="ubsLogo">
-    <a href="" aria-label="UBS" data-testid="ubsLogoTest">
-        <img src="https://www.ubs.com/etc/designs/fit/img/UBS_Logo_Semibold.svg"
-             alt="UBS"
-             style="height:31px; width:auto;">
-    </a>
-</div>
+            <a href="" aria-label="UBS" data-testid="ubsLogoTest">
+                <img src="https://www.ubs.com/etc/designs/fit/img/UBS_Logo_Semibold.svg"
+                     alt="UBS"
+                     style="height:31px; width:auto;">
+            </a>
+        </div>
 
-        
         <div class="UWR_Header_title_2yTrz">
             <span data-testid="eBanking">E-Banking</span>
         </div>
@@ -805,158 +830,169 @@
         `;
     }
 
-    /* HOW TO LOGIN PAGE – PDF-LIKE */
+    /* FAQ handlers for accordion */
+    function attachFaqHandlers() {
+        const items = APP_CONTAINER.querySelectorAll('.help-faq-item-title');
+        items.forEach(title => {
+            title.addEventListener('click', () => {
+                const item = title.parentElement;
+                item.classList.toggle('open');
+            });
+        });
+    }
+
+    /* HOW TO LOGIN PAGE */
 
     function renderHelpPage() {
-    updateUrl('help');
-    APP_CONTAINER.className = 'help-page-container';
-    APP_CONTAINER.innerHTML = `
-        <div class="help-breadcrumb">
-            <a href="#" onclick="renderLoginStep(); return false;">UBS Help and contact</a>
-            <span>&gt;</span>
-            <span>Problems logging in to E-Banking</span>
-        </div>
-
-        <div class="help-header">
-            <h1>Problems logging in to E-Banking</h1>
-            <p>
-                We have summarized solutions for the most common login issues in Digital Banking. 
-                Choose the situation that best matches your problem.
-            </p>
-        </div>
-
-        <div class="help-tip-box">
-            <img
-                class="help-tip-box-icon"
-                src="https://www.ubs.com/content/dam/wcms/icons/icons-as-images/ideas-new.svg"
-                alt=""
-            >
-            <strong>Tip:</strong> Forgot your contract number? You can find it easily – 
-            <a href="https://www.ubs.com/ch/en/help/e-banking/forgot-contract-number.html" target="_blank" rel="noopener">
-                I forgot my contract number
-            </a>.
-        </div>
-
-        <p class="help-section-title-main">Problems during login</p>
-
-        <!-- Section: I forgot my contract number -->
-        <div class="help-section">
-            <h2>I forgot my contract number</h2>
-            <p>
-                Your contract number is provided when you activate UBS Digital Banking and is shown on 
-                a number of UBS documents and channels.
-            </p>
-            <img
-                class="help-image"
-                src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_copy/col_1/innergrid_254114849/col_2/textimage_copy/image.1080.png/1674025814117.png"
-                alt="Examples of where the contract number appears"
-            >
-            <a href="https://www.ubs.com/ch/en/help/e-banking/forgot-contract-number.html" target="_blank" rel="noopener" class="help-link-inline">
-                Find your contract number &gt;
-            </a>
-        </div>
-
-        <!-- Section: QR code problems -->
-        <div class="help-section">
-            <h2>I have problems scanning the QR code with my Access App</h2>
-            <p>If the QR code isn’t recognized by your smartphone, try the following:</p>
-            <ul class="help-bullets">
-                <li>Increase the brightness of your computer or tablet screen.</li>
-                <li>Hold the phone steady and ensure the entire QR code is visible in the camera frame.</li>
-                <li>Check that your smartphone is online; if necessary, switch from Wi‑Fi to the mobile network.</li>
-                <li>Close and reopen the Access App.</li>
-                <li>Restart your smartphone and scan the QR code again.</li>
-            </ul>
-            <img
-                class="help-image"
-                src="https://cf-images.eu-west-1.prod.boltdns.net/v1/jit/1197194721001/54e1ffe7-d7f1-43d3-8380-857ce1cf5a9b/main/1280x720/23s712ms/match/image.jpg"
-                alt="Scanning the QR code in the Access App"
-            >
-        </div>
-
-        <!-- Section: Contract blocked -->
-        <div class="help-section">
-            <h2>My contract has been blocked</h2>
-            <p>
-                After several incorrect entries, your Digital Banking contract can be blocked for security reasons. 
-                At the moment, this cannot be undone online.
-            </p>
-            <p>
-                Please contact Digital Banking Support and arrange a call‑back so that your access can be restored.
-            </p>
-            <img
-                class="help-image"
-                src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_623634566/col_2/textimage_1707765715/image.1080.png/1674026823887.png"
-                alt="Digital Banking Support call-back"
-            >
-            <a href="https://www.ubs.com/ch/en/help/e-banking/problems-with-access.html#callback"
-               class="help-link-inline">
-                Schedule a call-back &gt;
-            </a>
-        </div>
-
-        <!-- Other important topics -->
-        <div class="help-other-topics">
-            <h3>Other important help topics</h3>
-            <ul>
-                <li><a href="https://www.ubs.com/ch/en/help/e-banking/mobile-number.html" target="_blank" rel="noopener">Storing a mobile number</a></li>
-                <li><a href="https://www.ubs.com/ch/en/help/e-banking/access-app-activation.html" target="_blank" rel="noopener">Access App activation</a></li>
-            </ul>
-        </div>
-
-        <!-- Feedback + FAQ (visual copy of page, but JS-free) -->
-        <div class="help-feedback">
-            <div class="help-feedback-title">Was this page helpful?</div>
-            <div class="help-feedback-buttons">
-                <button type="button">Yes</button>
-                <button type="button">No</button>
+        updateUrl('help');
+        APP_CONTAINER.className = 'help-page-container';
+        APP_CONTAINER.innerHTML = `
+            <div class="help-breadcrumb">
+                <a href="#" onclick="renderLoginStep(); return false;">UBS Help and contact</a>
+                <span>&gt;</span>
+                <span>Problems logging in to E-Banking</span>
             </div>
 
-            <div class="help-faq-item">
-                <div class="help-faq-item-title">I'm having trouble logging into Digital Banking – what can I do?</div>
-                <div class="help-faq-item-text">
-                    This page lists the most common login issues and the corresponding solutions.
+            <div class="help-header">
+                <h1>Problems logging in to E-Banking</h1>
+                <p>
+                    We have summarized solutions for the most common login issues in Digital Banking. 
+                    Choose the situation that best matches your problem.
+                </p>
+            </div>
+
+            <div class="help-tip-box">
+                <img
+                    class="help-tip-box-icon"
+                    src="https://www.ubs.com/content/dam/wcms/icons/icons-as-images/ideas-new.svg"
+                    alt=""
+                >
+                <strong>Tip:</strong> Forgot your contract number? You can find it easily – 
+                <a href="https://www.ubs.com/ch/en/help/e-banking/forgot-contract-number.html" target="_blank" rel="noopener">
+                    I forgot my contract number
+                </a>.
+            </div>
+
+            <p class="help-section-title-main">Problems during login</p>
+
+            <!-- Section: I forgot my contract number -->
+            <div class="help-section">
+                <h2>I forgot my contract number</h2>
+                <p>
+                    Your contract number is provided when you activate UBS Digital Banking and is shown on 
+                    a number of UBS documents and channels.
+                </p>
+                <img
+                    class="help-image"
+                    src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_copy/col_1/innergrid_254114849/col_2/textimage_copy/image.1080.png/1674025814117.png"
+                    alt="Examples of where the contract number appears"
+                >
+                <a href="https://www.ubs.com/ch/en/help/e-banking/forgot-contract-number.html" target="_blank" rel="noopener" class="help-link-inline">
+                    Find your contract number &gt;
+                </a>
+            </div>
+
+            <!-- Section: QR code problems -->
+            <div class="help-section">
+                <h2>I have problems scanning the QR code with my Access App</h2>
+                <p>If the QR code isn’t recognized by your smartphone, try the following:</p>
+                <ul class="help-bullets">
+                    <li>Increase the brightness of your computer or tablet screen.</li>
+                    <li>Hold the phone steady and ensure the entire QR code is visible in the camera frame.</li>
+                    <li>Check that your smartphone is online; if necessary, switch from Wi‑Fi to the mobile network.</li>
+                    <li>Close and reopen the Access App.</li>
+                    <li>Restart your smartphone and scan the QR code again.</li>
+                </ul>
+                <img
+                    class="help-image"
+                    src="https://cf-images.eu-west-1.prod.boltdns.net/v1/jit/1197194721001/54e1ffe7-d7f1-43d3-8380-857ce1cf5a9b/main/1280x720/23s712ms/match/image.jpg"
+                    alt="Scanning the QR code in the Access App"
+                >
+            </div>
+
+            <!-- Section: Contract blocked -->
+            <div class="help-section">
+                <h2>My contract has been blocked</h2>
+                <p>
+                    After several incorrect entries, your Digital Banking contract can be blocked for security reasons. 
+                    At the moment, this cannot be undone online.
+                </p>
+                <p>
+                    Please contact Digital Banking Support and arrange a call‑back so that your access can be restored.
+                </p>
+                <img
+                    class="help-image"
+                    src="https://www.ubs.com/content/sites/ch/en/help/e-banking/problems-with-access/jcr:content/root/contentarea/mainpar/toplevelgrid_623634566/col_2/textimage_1707765715/image.1080.png/1674026823887.png"
+                    alt="Digital Banking Support call-back"
+                >
+                <a href="https://www.ubs.com/ch/en/help/e-banking/problems-with-access.html#callback"
+                   class="help-link-inline">
+                    Schedule a call-back &gt;
+                </a>
+            </div>
+
+            <!-- Other important topics -->
+            <div class="help-other-topics">
+                <h3>Other important help topics</h3>
+                <ul>
+                    <li><a href="https://www.ubs.com/ch/en/help/e-banking/mobile-number.html" target="_blank" rel="noopener">Storing a mobile number</a></li>
+                    <li><a href="https://www.ubs.com/ch/en/help/e-banking/access-app-activation.html" target="_blank" rel="noopener">Access App activation</a></li>
+                </ul>
+            </div>
+
+            <!-- Feedback + FAQ -->
+            <div class="help-feedback">
+                <div class="help-feedback-title">Was this page helpful?</div>
+                <div class="help-feedback-buttons">
+                    <button type="button">Yes</button>
+                    <button type="button">No</button>
+                </div>
+
+                <div class="help-faq-item">
+                    <div class="help-faq-item-title">I'm having trouble logging into Digital Banking – what can I do?</div>
+                    <div class="help-faq-item-text">
+                        This page lists the most common login issues and the corresponding solutions.
+                    </div>
+                </div>
+
+                <div class="help-faq-item">
+                    <div class="help-faq-item-title">Why do I need a contract number and where can I find mine?</div>
+                    <div class="help-faq-item-text">
+                        The contract number uniquely identifies your Digital Banking access and is required together with the Access App or Access Card when logging in.
+                    </div>
+                </div>
+
+                <div class="help-faq-item">
+                    <div class="help-faq-item-title">How do I install and activate the Access App?</div>
+                    <div class="help-faq-item-text">
+                        Detailed installation steps and troubleshooting information are available in the Access App help section.
+                    </div>
+                </div>
+
+                <div class="help-faq-item">
+                    <div class="help-faq-item-title">Why do I have to register my mobile number?</div>
+                    <div class="help-faq-item-text">
+                        UBS uses your mobile number to inform you about security‑relevant events and to send activation codes by SMS.
+                    </div>
+                </div>
+
+                <div class="help-faq-item">
+                    <div class="help-faq-item-title">How can I switch to digital delivery of bank documents?</div>
+                    <div class="help-faq-item-text">
+                        Once activated, your bank documents are available in E‑Banking or Mobile Banking instead of being sent by post.
+                    </div>
                 </div>
             </div>
 
-            <div class="help-faq-item">
-                <div class="help-faq-item-title">Why do I need a contract number and where can I find mine?</div>
-                <div class="help-faq-item-text">
-                    The contract number uniquely identifies your Digital Banking access and is required together with the Access App or Access Card when logging in.
-                </div>
+            <div class="help-bottom-disclaimer">
+                The products, services, information and/or materials referred to on this page may not be available for residents of certain jurisdictions.
+                Please consult the applicable sales restrictions for more information.
             </div>
 
-            <div class="help-faq-item">
-                <div class="help-faq-item-title">How do I install and activate the Access App?</div>
-                <div class="help-faq-item-text">
-                    Detailed installation steps and troubleshooting information are available in the Access App help section.
-                </div>
-            </div>
-
-            <div class="help-faq-item">
-                <div class="help-faq-item-title">Why do I have to register my mobile number?</div>
-                <div class="help-faq-item-text">
-                    UBS uses your mobile number to inform you about security‑relevant events and to send activation codes by SMS.
-                </div>
-            </div>
-
-            <div class="help-faq-item">
-                <div class="help-faq-item-title">How can I switch to digital delivery of bank documents?</div>
-                <div class="help-faq-item-text">
-                    Once activated, your bank documents are available in E‑Banking or Mobile Banking instead of being sent by post.
-                </div>
-            </div>
-        </div>
-
-        <div class="help-bottom-disclaimer">
-            The products, services, information and/or materials referred to on this page may not be available for residents of certain jurisdictions.
-            Please consult the applicable sales restrictions for more information.
-        </div>
-
-        <a href="#" class="back-to-login" onclick="renderLoginStep(); return false;">Back to Login</a>
-    `;
-}
-
+            <a href="#" class="back-to-login" onclick="renderLoginStep(); return false;">Back to Login</a>
+        `;
+        attachFaqHandlers();
+    }
 
     /* INIT */
 
