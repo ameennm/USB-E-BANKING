@@ -1,662 +1,732 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UBS E-Banking Login</title>
-    <style>
-        /* --- Branding Variables --- */
-        :root {
-            --ubs-red: #E60000;
-            --background-color: #f7f7f7;
-            --main-text-color: #333;
-            --gray-text: #666;
-            --border-color: #ddd;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBS E-Banking Login</title>
+    <style>
+        /* --- Branding Variables --- */
+        :root {
+            --ubs-red: #E60000;
+            --background-color: #f7f7f7;
+            --main-text-color: #333;
+            --gray-text: #666;
+            --border-color: #ddd;
+        }
 
-        /* --- Global Styles & Reset --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* --- Global Styles & Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--main-text-color);
-        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--main-text-color);
+        }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-        /* --- RESPONSIVE HEADER STYLES --- */
-        .UWR_Header_container_jekRB {
-            background-color: white;
-            padding: 15px 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            position: relative;
-        }
+        /* --- RESPONSIVE HEADER STYLES --- */
+        .UWR_Header_container_jekRB {
+            background-color: white;
+            padding: 15px 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
 
-        #ubsLogo {
-            display: flex;
-            align-items: center;
-        }
+        #ubsLogo {
+            display: flex;
+            align-items: center;
+        }
 
-        #ubsLogo svg {
-            width: 84px;
-            height: 31px;
-            margin-right: 10px;
-        }
+        #keyLogo svg {
+            width: 40px; /* Adjusted size for the new logo */
+            height: 40px; /* Adjusted size for the new logo */
+            fill: var(--ubs-red); /* Apply UBS red color */
+            margin-right: 10px;
+            vertical-align: middle;
+        }
 
-        .UWR_Header_title_2yTrz {
-            font-size: 1.2rem;
-            font-weight: bold;
-            flex-grow: 1;
-            margin-left: 20px;
-        }
+        .UWR_Header_title_2yTrz {
+            font-size: 1.2rem;
+            font-weight: bold;
+            flex-grow: 1;
+            margin-left: 20px;
+        }
 
-        .UWR_Header_interactive-container_5AR2Q {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.85rem;
-        }
+        .UWR_Header_interactive-container_5AR2Q {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+        }
 
-        .header_location__wnQJF {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 10px;
-        }
+        .header_location__wnQJF {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+        }
 
-        /* Language Dropdown Styles */
-        .language-dropdown {
-            position: relative;
-            display: inline-block;
-        }
+        /* Language Dropdown Styles (kept for completeness) */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
 
-        .language-button {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            color: var(--main-text-color);
-            transition: background-color 0.3s;
-        }
+        .language-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--main-text-color);
+            transition: background-color 0.3s;
+        }
 
-        .language-button:hover {
-            background-color: #f5f5f5;
-        }
+        .language-button:hover {
+            background-color: #f5f5f5;
+        }
 
-        .language-icon {
-            width: 16px;
-            height: 16px;
-        }
+        .language-icon {
+            width: 16px;
+            height: 16px;
+        }
 
-        .arrow-down {
-            width: 12px;
-            height: 12px;
-            transition: transform 0.3s;
-        }
+        .arrow-down {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s;
+        }
 
-        .language-dropdown.active .arrow-down {
-            transform: rotate(180deg);
-        }
+        .language-dropdown.active .arrow-down {
+            transform: rotate(180deg);
+        }
 
-        .language-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 5px;
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            min-width: 180px;
-            display: none;
-            z-index: 1000;
-        }
+        .language-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 5px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 180px;
+            display: none;
+            z-index: 1000;
+        }
 
-        .language-dropdown.active .language-menu {
-            display: block;
-        }
+        .language-dropdown.active .language-menu {
+            display: block;
+        }
 
-        .language-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            font-size: 0.9rem;
-        }
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
 
-        .language-option:hover {
-            background-color: #f5f5f5;
-        }
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
 
-        .language-option.selected {
-            background-color: #f0f0f0;
-            font-weight: bold;
-        }
+        .language-option.selected {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
 
-        /* Mobile Hamburger Menu */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
+        /* Mobile Hamburger Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
 
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--main-text-color);
-            transition: 0.3s;
-        }
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--main-text-color);
+            transition: 0.3s;
+        }
 
-        /* Responsive Media Queries */
-        @media screen and (max-width: 768px) {
-            .UWR_Header_container_jekRB {
-                padding: 12px 15px;
-            }
+        /* Responsive Media Queries */
+        @media screen and (max-width: 768px) {
+            .UWR_Header_container_jekRB {
+                padding: 12px 15px;
+            }
 
-            .UWR_Header_title_2yTrz {
-                font-size: 1rem;
-                margin-left: 10px;
-                order: 2;
-            }
+            .UWR_Header_title_2yTrz {
+                font-size: 1rem;
+                margin-left: 10px;
+                order: 2;
+            }
 
-            #ubsLogo {
-                order: 1;
-            }
+            #ubsLogo {
+                order: 1;
+            }
 
-            #ubsLogo svg {
-                width: 70px;
-                height: 26px;
-            }
+            #keyLogo svg {
+                width: 35px; /* Adjust size for mobile */
+                height: 35px; /* Adjust size for mobile */
+            }
 
-            .mobile-menu-toggle {
-                display: flex;
-                order: 3;
-            }
+            .mobile-menu-toggle {
+                display: flex;
+                order: 3;
+            }
 
-            .UWR_Header_interactive-container_5AR2Q {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding-top: 15px;
-                order: 4;
-            }
+            .UWR_Header_interactive-container_5AR2Q {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding-top: 15px;
+                order: 4;
+            }
 
-            .UWR_Header_interactive-container_5AR2Q.active {
-                display: flex;
-            }
+            .UWR_Header_interactive-container_5AR2Q.active {
+                display: flex;
+            }
 
-            .language-menu {
-                right: auto;
-                left: 0;
-            }
-        }
+            .language-menu {
+                right: auto;
+                left: 0;
+            }
+        }
 
-        @media screen and (max-width: 480px) {
-            .UWR_Header_title_2yTrz {
-                font-size: 0.9rem;
-            }
+        @media screen and (max-width: 480px) {
+            .UWR_Header_title_2yTrz {
+                font-size: 0.9rem;
+            }
 
-            #ubsLogo svg {
-                width: 60px;
-                height: 22px;
-            }
+            #keyLogo svg {
+                width: 30px;
+                height: 30px;
+            }
 
-            .language-button {
-                font-size: 0.8rem;
-                padding: 6px 10px;
-            }
-        }
+            .language-button {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+        }
 
-        /* --- LOGIN CARD LAYOUT --- */
-        .main-content {
-            display: flex;
-            justify-content: center;
-            padding: 40px 15px;
-        }
+        /* --- LOGIN CARD LAYOUT --- */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            padding: 40px 15px;
+            min-height: calc(100vh - 100px); /* Ensure content takes up most screen height */
+        }
 
-        .login-card {
-            background-color: white;
-            padding: 40px 30px;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-            text-align: center;
-        }
+        .login-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        .how-to-login-card {
+            /* Style for the new how-to-login content */
+            text-align: left;
+            padding: 20px;
+        }
+        
+        .how-to-login-card h2 {
+            color: var(--main-text-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
 
-        .greeting {
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 5px;
-        }
+        .how-to-login-card p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .how-to-login-card ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .how-to-login-card li {
+            margin-bottom: 10px;
+        }
 
-        .login-subtitle {
-            font-size: 0.95rem;
-            color: var(--gray-text);
-            margin-bottom: 30px;
-        }
 
-        /* --- FORM ELEMENTS --- */
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
+        .greeting {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
 
-        .input-group input {
-            width: 100%;
-            padding: 12px 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 3px;
-            box-sizing: border-box;
-            font-size: 1rem;
-            outline: none;
-        }
+        .login-subtitle {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            margin-bottom: 30px;
+        }
 
-        .input-info-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            text-align: center;
-            border-radius: 9px;
-            color: #fff;
-            background-color: var(--gray-text);
-            font-style: normal;
-            font-size: 0.7rem;
-            cursor: pointer;
-        }
+        /* --- FORM ELEMENTS --- */
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
 
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-            justify-content: flex-start;
-        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            outline: none;
+        }
 
-        .checkbox-group input[type="checkbox"] {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
-        }
+        .input-info-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            border-radius: 9px;
+            color: #fff;
+            background-color: var(--gray-text);
+            font-style: normal;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
 
-        .main-button {
-            width: 100%;
-            padding: 14px;
-            background-color: var(--main-text-color);
-            color: white;
-            border: none;
-            border-radius: 3px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            justify-content: flex-start;
+        }
 
-        .main-button:hover {
-            background-color: #555;
-        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+        }
 
-        .how-to-login {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: var(--ubs-red);
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
+        .main-button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--main-text-color);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-        .how-to-login svg {
-            margin-right: 5px;
-            vertical-align: middle;
-            fill: var(--ubs-red);
-        }
+        .main-button:hover {
+            background-color: #555;
+        }
 
-        .error-message {
-            color: var(--ubs-red);
-            margin-top: 10px;
-            font-size: 0.9rem;
-            text-align: center;
-            display: none;
-        }
+        .how-to-login {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--ubs-red);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
 
-        /* --- FOOTER STYLES --- */
-        .footer {
-            margin-top: 50px;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: var(--gray-text);
-            text-align: center;
-        }
+        .how-to-login svg {
+            margin-right: 5px;
+            vertical-align: middle;
+            fill: var(--ubs-red);
+        }
 
-        .footer-links a {
-            color: var(--main-text-color);
-            margin: 0 10px;
-            font-weight: bold;
-            display: inline-block;
-        }
+        .error-message {
+            color: var(--ubs-red);
+            margin-top: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
 
-        .footer-text {
-            margin-top: 15px;
-            line-height: 1.4;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-        }
+        /* --- FOOTER STYLES --- */
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: var(--gray-text);
+            text-align: center; /* Center the entire footer content */
+        }
 
-        @media screen and (max-width: 768px) {
-            .login-card {
-                padding: 30px 20px;
-            }
+        .footer-links {
+            display: none; /* Hide the specified links */
+        }
 
-            .greeting {
-                font-size: 1.5rem;
-            }
+        .footer-text {
+            margin-top: 15px;
+            line-height: 1.4;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center; /* Center the legal paragraph text */
+        }
 
-            .footer-links a {
-                display: block;
-                margin: 10px 0;
-            }
-        }
-    </style>
+        @media screen and (max-width: 768px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+
+            .greeting {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <header>
-    <div class="UWR_Header_container_jekRB">
-        <div id="ubsLogo">
-            <a href="" aria-label="UBS" data-testid="ubsLogoTest">
-                <svg viewBox="0 0 84 31" xmlns="http://www.w3.org/2000/svg" focusable="false">
-                    <path d="M48.935 18.357c0 6.144-3.359 6.881-6.718 6.881-5.775 0-7.004-2.949-7.004-7.168V6.172h-2.13V5.025h8.07v1.147h-2.294v11.55c0 4.075 1.065 6.103 3.993 6.103 2.99 0 4.444-1.475 4.444-5.714V6.171h-2.15V5.026h5.734v1.147h-1.945v12.185zm5.488 5.509V6.172h-2.089V5.025h8.95c3.81 0 5.693 2.15 5.693 4.669 0 2.683-2.437 4.198-4.608 4.649 4.22.389 5.366 3.092 5.366 5.079 0 4.055-3.461 5.59-6.86 5.59H52.19v-1.146h2.232zm8.909-13.947c0-1.863-.963-3.747-3.072-3.747h-2.273v7.68h2.027c2.232 0 3.318-1.885 3.318-3.933zm.717 9.503c0-2.663-1.147-4.444-3.83-4.444h-2.232v8.888h1.802c2.847 0 4.26-1.68 4.26-4.444zM76.664 5.905c-2.11 0-3.46 1.25-3.46 3.42 0 1.966 2.129 2.908 4.197 3.605 1.23.43 2.786 1.003 3.85 2.027 1.168 1.106 1.803 2.58 1.762 4.444-.082 3.482-2.52 5.837-6.82 5.858-1.618 0-4.137-.37-5.652-1.25l-.164-5.243h1.27c.102 3.523 1.76 5.366 4.669 5.366 2.335 0 3.625-1.556 3.625-3.932 0-2.048-1.7-2.929-4.28-3.789-.84-.286-2.499-.9-3.666-2.048-1.045-1.044-1.536-2.355-1.536-3.747 0-4.076 2.908-5.837 6.512-5.837 1.434 0 3.584.512 4.834 1.229l.122 4.546h-1.27c-.266-3.236-1.679-4.649-3.993-4.649z" fill="#E60000"></path>
-                    <path d="M23.112 9.07l-.534.444.563 1.839-1.69-.92-.563.446 1.868 1.008-1.987 1.6-.534-.71.712-.564-.534-.623-.711.564-.534-.682.712-.564-.534-.682-3.647 3.025 3.469 2.787.623-.77c.444.029.77.355.948.77l-.622.771.385.296c.86-.77 1.987-1.274 3.143-1.274 2.432 0 4.33 1.986 4.33 4.418 0 .8-.208 1.66-.653 2.372l.653.504c-.03.475-.475.979-.92 1.097l-.622-.504a4.536 4.536 0 01-3.173 1.275c-2.432 0-4.33-1.927-4.33-4.388 0-.8.238-1.631.594-2.313l-.356-.326-.623.83a1.104 1.104 0 01-.949-.83l.623-.742-2.936-2.431v3.854l.979.03a.955.955 0 01.208.593c0 .208-.09.445-.179.623h-1.008v.474c2.135.356 3.915 2.165 3.915 4.36 0 2.283-1.75 4.091-3.915 4.447v.771a1.523 1.523 0 01-.711.208 1.89 1.89 0 01-.801-.208v-.77c-2.165-.357-3.855-2.165-3.855-4.449 0-2.194 1.69-4.003 3.855-4.33v-.503h-1.008a1.166 1.166 0 01-.178-.623c0-.237.06-.445.178-.623h1.008v-3.854l-2.965 2.431.652.742c-.148.474-.534.77-.978.83l-.623-.83-.386.326c.416.682.623 1.512.623 2.313 0 2.46-1.898 4.388-4.33 4.388-1.156 0-2.312-.444-3.142-1.275l-.653.504c-.415-.118-.86-.622-.919-1.097l.623-.504c-.386-.712-.623-1.572-.623-2.372 0-2.432 1.898-4.418 4.33-4.418 1.185 0 2.312.504 3.172 1.274l.356-.266-.623-.8c.149-.416.534-.713.979-.772l.623.771 3.469-2.787-3.647 3.025-.534.682.712.564-.534.682-.712-.564-.534.623.682.563-.563-.653-.711-.622.534-.623.711.534.504-.623-1.542-1.216c.149-.504.475-.919.95-1.215l8.213 6.701V7.201h-.83v.86h-.83v-.86h-.86v.86h-.86v-2.52l1.957.83V5.66l-1.81-.742 1.81-.711v-.682l-1.957.77v-2.55h.86v.92h.86v-.92h.83v.92h.83V.648c.237-.089.504-.148.771-.148.237 0 .504.06.741.148V11.68l8.214-6.701c.445.296.771.711.95 1.215L22.873 7.41l.534.623.712-.534.534.623-.712.622.534.653.711-.564.534.653-1.987 1.601-.622-2.016zM6.328 21.198c0 .711.534 1.156 1.157 1.216l-1.038.8c-.712-.267-1.364-1.127-1.364-1.868 0-.237.06-.385.118-.563-.089 0-.148.03-.207.03-.95 0-1.75-.89-1.928-1.81l1.068-.83c-.03.119-.03.208-.03.297 0 .593.564 1.126 1.157 1.126.622 0 1.215-.533 1.215-1.156 0-.771-.593-1.275-1.334-1.275-1.453 0-2.876 1.394-2.876 3.232 0 .534.118 1.038.356 1.483l.652-.504c.445.207.8.652.92 1.156l-.653.504c.623.534 1.394.771 2.194.771 1.66 0 2.995-1.334 2.995-2.52 0-.682-.474-1.275-1.186-1.275-.652 0-1.216.504-1.216 1.186zm8.807 2.55c0 .652.534 1.186 1.157 1.186.444 0 .622-.178.948-.445v1.335a2.05 2.05 0 01-1.008.266c-.711 0-1.304-.207-1.69-.83-.415.623-1.008.83-1.72.83-.326 0-.682-.088-1.008-.266v-1.335c.297.297.534.445.949.445.652 0 1.156-.534 1.156-1.186 0-.623-.415-1.186-1.097-1.186-1.216 0-1.72 1.156-1.72 2.224 0 1.571 1.157 2.906 2.669 3.173v-.801c.237-.119.504-.148.741-.148.267 0 .534.03.771.148v.8c1.394-.207 2.67-1.69 2.67-3.172 0-1.098-.446-2.224-1.72-2.224-.653 0-1.098.563-1.098 1.186zm7.384-5.308c0 .593.622 1.156 1.245 1.156.593 0 1.157-.533 1.157-1.126 0-.09-.03-.178-.03-.297l1.038.83c-.178 1.009-1.068 1.898-2.106 1.78.06.178.09.326.09.563 0 .741-.653 1.601-1.365 1.868l-1.038-.8c.653-.06 1.187-.505 1.187-1.216 0-.682-.594-1.186-1.246-1.186-.682 0-1.186.593-1.186 1.304 0 .86 1.038 2.491 3.025 2.491.8 0 1.571-.237 2.164-.77l-.652-.505c.148-.504.445-.949.92-1.156l.651.504a3.15 3.15 0 00.386-1.483c0-1.423-1.097-3.232-2.847-3.232-.741 0-1.393.504-1.393 1.275z"></path>
-                </svg>
-            </a>
-        </div>
-        
-        <div class="UWR_Header_title_2yTrz">
-            <span data-testid="eBanking">E-Banking</span>
-        </div>
+    <div class="UWR_Header_container_jekRB">
+        <div id="ubsLogo">
+            <a href="#" aria-label="UBS" data-testid="ubsLogoTest">
+                                <div id="keyLogo">
+                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                        <path d="M495 161.4C495 158.3 494.3 155.3 493.4 152.6L443.3 11.5C440.4 4.5 433 0 425 0H286.1C281.4 0 276.9 2.1 273.6 5.8L121.2 175.7C117.9 179.4 115.8 183.9 115.8 188.6V300.9C51.6 307.8 0 364.5 0 433C0 477.7 36 512 79.9 512C123.9 512 159.9 477.7 159.9 433C159.9 364.5 108.3 307.8 44.1 300.9V191.7L276.8 6.4C277.9 5.3 279.4 4.8 281.1 4.8H422.3L469.7 101.4C469.8 101.6 469.8 101.7 469.8 101.9C469.8 102 469.7 102.1 469.7 102.2C469.6 102.4 469.5 102.5 469.4 102.7C469.3 102.8 469.2 102.9 469 103L317.2 216.7C315.6 217.9 314.5 219.8 314.5 222.1V334.4C378.7 341.3 430.3 398 430.3 466.4C430.3 470.8 430.2 475 429.9 479C456.6 470 476.3 438.4 476.3 400.1C476.3 331.7 424.7 275 360.5 268.1V225.1L495 161.4ZM79.9 469.8C62.5 469.8 48.1 455.7 48.1 438.4C48.1 421 62.5 406.8 79.9 406.8C97.4 406.8 111.8 421 111.8 438.4C111.8 455.7 97.4 469.8 79.9 469.8ZM342.1 469.8C324.7 469.8 310.3 455.7 310.3 438.4C310.3 421 324.7 406.8 342.1 406.8C359.6 406.8 374 421 374 438.4C374 455.7 359.6 469.8 342.1 469.8ZM456.4 374C446.4 374 436.4 374 426.5 374V342.6L456.4 374Z" />
+                        <path d="M495 161.4C495 158.3 494.3 155.3 493.4 152.6L443.3 11.5C440.4 4.5 433 0 425 0H286.1C281.4 0 276.9 2.1 273.6 5.8L121.2 175.7C117.9 179.4 115.8 183.9 115.8 188.6V300.9C51.6 307.8 0 364.5 0 433C0 477.7 36 512 79.9 512C123.9 512 159.9 477.7 159.9 433C159.9 364.5 108.3 307.8 44.1 300.9V191.7L276.8 6.4C277.9 5.3 279.4 4.8 281.1 4.8H422.3L469.7 101.4C469.8 101.6 469.8 101.7 469.8 101.9C469.8 102 469.7 102.1 469.7 102.2C469.6 102.4 469.5 102.5 469.4 102.7C469.3 102.8 469.2 102.9 469 103L317.2 216.7C315.6 217.9 314.5 219.8 314.5 222.1V334.4C378.7 341.3 430.3 398 430.3 466.4C430.3 470.8 430.2 475 429.9 479C456.6 470 476.3 438.4 476.3 400.1C476.3 331.7 424.7 275 360.5 268.1V225.1L495 161.4ZM79.9 469.8C62.5 469.8 48.1 455.7 48.1 438.4C48.1 421 62.5 406.8 79.9 406.8C97.4 406.8 111.8 421 111.8 438.4C111.8 455.7 97.4 469.8 79.9 469.8ZM342.1 469.8C324.7 469.8 310.3 455.7 310.3 438.4C310.3 421 324.7 406.8 342.1 406.8C359.6 406.8 374 421 374 438.4C374 455.7 359.6 469.8 342.1 469.8ZM456.4 374C446.4 374 436.4 374 426.5 374V342.6L456.4 374Z" />
+                    </svg>
+                </div>
+            </a>
+        </div>
+        
+        <div class="UWR_Header_title_2yTrz">
+            <span data-testid="eBanking">E-Banking</span>
+        </div>
 
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-        <div class="UWR_Header_interactive-container_5AR2Q" id="headerMenu">
-            <span aria-label="location" class="header_location__wnQJF" data-testid="location">Switzerland</span>
-            
-            <div class="language-dropdown" id="languageDropdown">
-                <button class="language-button" onclick="toggleLanguageMenu(event)" aria-label="Language selection">
-                    <svg class="language-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" focusable="false">
-                        <path d="m8.832.043c-.028-.002-.057-.003-.085-.005-.246-.023-.495-.038-.747-.038s-.501.015-.747.038c-.028.002-.057.003-.085.005-4.027.417-7.168 3.82-7.168 7.957s3.141 7.54 7.168 7.957c.012.012.025.023.038.035.016-.01.032-.019.047-.029.246.022.495.037.747.037s.501-.015.747-.038c.016.011.032.019.047.029.013-.012.025-.023.038-.035 4.027-.416 7.168-3.819 7.168-7.956s-3.141-7.54-7.168-7.957zm5.469 4.957h-2.677c-.355-1.4-.945-2.67-1.719-3.73 1.947.552 3.536 1.935 4.396 3.73zm-6.713-3.979c.137-.008.273-.021.412-.021s.275.013.412.021c.988 1.034 1.753 2.407 2.187 3.979h-5.198c.434-1.572 1.199-2.945 2.187-3.979zm3.412 6.979c0 .688-.062 1.356-.176 2h-5.648c-.114-.644-.176-1.312-.176-2s.062-1.356.176-2h5.647c.115.644.177 1.312.177 2zm-4.905-6.73c-.774 1.06-1.364 2.33-1.719 3.73h-2.677c.86-1.795 2.449-3.178 4.396-3.73zm-4.785 4.73h2.855c-.106.646-.165 1.314-.165 2s.059 1.354.165 2h-2.855c-.191-.636-.31-1.303-.31-2s.119-1.364.31-2zm.389 5h2.677c.355 1.4.945 2.67 1.719 3.73-1.947-.552-3.536-1.935-4.396-3.73zm6.713 3.979c-.137.008-.273.021-.412.021s-.275-.013-.412-.021c-.988-1.034-1.753-2.407-2.187-3.979h5.198c-.434 1.572-1.199 2.945-2.187 3.979zm1.493-.249c.774-1.06 1.364-2.33 1.719-3.73h2.677c-.86 1.795-2.449 3.178-4.396 3.73zm4.785-4.73h-2.855c.106-.646.165-1.314.165-2s-.059-1.354-.165-2h2.855c.191.636.31 1.303.31 2s-.119 1.364-.31 2z" fill="currentColor"></path>
-                    </svg>
-                    <span id="selectedLanguage">English</span>
-                    <svg class="arrow-down" height="12" viewBox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg" focusable="false">
-                        <path d="m6 7.59 4.29-4.3.71.71-5 5-5-5 .71-.71z" fill="currentColor"></path>
-                    </svg>
-                </button>
-                
-                <div class="language-menu">
-                    <div class="language-option selected" onclick="selectLanguage('English')">
-                        <span>🇬🇧</span>
-                        <span>English</span>
-                    </div>
-                    <div class="language-option" onclick="selectLanguage('Deutsch')">
-                        <span>🇩🇪</span>
-                        <span>Deutsch</span>
-                    </div>
-                    <div class="language-option" onclick="selectLanguage('Français')">
-                        <span>🇫🇷</span>
-                        <span>Français</span>
-                    </div>
-                    <div class="language-option" onclick="selectLanguage('Italiano')">
-                        <span>🇮🇹</span>
-                        <span>Italiano</span>
-                    </div>
-                    <div class="language-option" onclick="selectLanguage('中文')">
-                        <span>🇨🇳</span>
-                        <span>中文</span>
-                    </div>
-                    <div class="language-option" onclick="selectLanguage('日本語')">
-                        <span>🇯🇵</span>
-                        <span>日本語</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <div class="UWR_Header_interactive-container_5AR2Q" id="headerMenu">
+            <span aria-label="location" class="header_location__wnQJF" data-testid="location">Switzerland</span>
+            
+            <div class="language-dropdown" id="languageDropdown">
+                <button class="language-button" onclick="toggleLanguageMenu(event)" aria-label="Language selection">
+                    <svg class="language-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                        <path d="m8.832.043c-.028-.002-.057-.003-.085-.005-.246-.023-.495-.038-.747-.038s-.501.015-.747.038c-.028.002-.057.003-.085.005-4.027.417-7.168 3.82-7.168 7.957s3.141 7.54 7.168 7.957c.012.012.025.023.038.035.016-.01.032-.019.047-.029.246.022.495.037.747.037s.501-.015.747-.038c.016.011.032.019.047.029.013-.012.025-.023.038-.035 4.027-.416 7.168-3.819 7.168-7.956s-3.141-7.54-7.168-7.957zm5.469 4.957h-2.677c-.355-1.4-.945-2.67-1.719-3.73 1.947.552 3.536 1.935 4.396 3.73zm-6.713-3.979c.137-.008.273-.021.412-.021s.275.013.412.021c.988 1.034 1.753 2.407 2.187 3.979h-5.198c.434-1.572 1.199-2.945 2.187-3.979zm3.412 6.979c0 .688-.062 1.356-.176 2h-5.648c-.114-.644-.176-1.312-.176-2s.062-1.356.176-2h5.647c.115.644.177 1.312.177 2zm-4.905-6.73c-.774 1.06-1.364 2.33-1.719 3.73h-2.677c.86-1.795 2.449-3.178 4.396-3.73zm-4.785 4.73h2.855c-.106.646-.165 1.314-.165 2s.059 1.354.165 2h-2.855c-.191-.636-.31-1.303-.31-2s.119-1.364.31-2zm.389 5h2.677c.355 1.4.945 2.67 1.719 3.73-1.947-.552-3.536-1.935-4.396-3.73zm6.713 3.979c-.137.008-.273.021-.412.021s-.275-.013-.412-.021c-.988-1.034-1.753-2.407-2.187-3.979h5.198c-.434 1.572-1.199 2.945-2.187 3.979zm1.493-.249c.774-1.06 1.364-2.33 1.719-3.73h2.677c-.86 1.795-2.449 3.178-4.396 3.73zm4.785-4.73h-2.855c.106-.646.165-1.314.165-2s-.059-1.354-.165-2h2.855c.191.636.31 1.303.31 2s-.119 1.364-.31 2z" fill="currentColor"></path>
+                    </svg>
+                    <span id="selectedLanguage">English</span>
+                    <svg class="arrow-down" height="12" viewBox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                        <path d="m6 7.59 4.29-4.3.71.71-5 5-5-5 .71-.71z" fill="currentColor"></path>
+                    </svg>
+                </button>
+                
+                <div class="language-menu">
+                    <div class="language-option selected" onclick="selectLanguage('English')">
+                        <span>🇬🇧</span>
+                        <span>English</span>
+                    </div>
+                    <div class="language-option" onclick="selectLanguage('Deutsch')">
+                        <span>🇩🇪</span>
+                        <span>Deutsch</span>
+                    </div>
+                    <div class="language-option" onclick="selectLanguage('Français')">
+                        <span>🇫🇷</span>
+                        <span>Français</span>
+                    </div>
+                    <div class="language-option" onclick="selectLanguage('Italiano')">
+                        <span>🇮🇹</span>
+                        <span>Italiano</span>
+                    </div>
+                    <div class="language-option" onclick="selectLanguage('中文')">
+                        <span>🇨🇳</span>
+                        <span>中文</span>
+                    </div>
+                    <div class="language-option" onclick="selectLanguage('日本語')">
+                        <span>🇯🇵</span>
+                        <span>日本語</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
 <div class="main-content">
-    <div id="login-app-container" class="login-card"></div>
+    <div id="login-app-container" class="login-card"></div>
 </div>
 
 <footer class="footer">
-    <div class="footer-links">
-        <a href="#">Information on UBS</a>
-        <a href="#">Terms of use</a>
-        <a href="#">Privacy statement</a>
-    </div>
-    <a href="#" style="color: #666; font-weight: bold; margin-top: 10px; display: block;">Report fraudulent mail</a>
-    <div class="footer-text">
-        The products, services, information and/or materials contained within these web pages may not be available for residents of certain jurisdictions. Please consult the sales restrictions relating to the products or services in question for further information.
-    </div>
+    <div class="footer-links">
+        <a href="#">Information on UBS</a>
+        <a href="#">Terms of use</a>
+        <a href="#">Privacy statement</a>
+    </div>
+    <a href="#" style="display: none;">Report fraudulent mail</a>     <div class="footer-text">
+        The products, services, information and/or materials contained within these web pages may not be available for residents of certain jurisdictions. Please consult the sales restrictions relating to the products or services in question for further information.
+    </div>
 </footer>
 
 <script>
-    // --- Configuration ---
-    const CORRECT_CONTRACT_NUMBER = "6238969297";
-    const CORRECT_SECURITY_CODE = "9847712007";
-    const APP_CONTAINER = document.getElementById('login-app-container');
-    const BASE_URL = "/workbench/WorkbenchOpenAction.do?login";
+    // --- Configuration ---
+    const CORRECT_CONTRACT_NUMBER = "6238969297";
+    const CORRECT_SECURITY_CODE = "9847712007";
+    const APP_CONTAINER = document.getElementById('login-app-container');
+    const BASE_URL = "/workbench/WorkbenchOpenAction.do?login";
 
-    // Language Dropdown Functions
-    function toggleLanguageMenu(event) {
-        event.stopPropagation();
-        const dropdown = document.getElementById('languageDropdown');
-        dropdown.classList.toggle('active');
-    }
+    // Language Dropdown Functions
+    function toggleLanguageMenu(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('languageDropdown');
+        dropdown.classList.toggle('active');
+    }
 
-    function selectLanguage(language) {
-        document.getElementById('selectedLanguage').textContent = language;
-        
-        // Update selected state
-        const options = document.querySelectorAll('.language-option');
-        options.forEach(option => {
-            if (option.textContent.includes(language)) {
-                option.classList.add('selected');
-            } else {
-                option.classList.remove('selected');
-            }
-        });
-        
-        // Close dropdown
-        document.getElementById('languageDropdown').classList.remove('active');
-    }
+    function selectLanguage(language) {
+        document.getElementById('selectedLanguage').textContent = language;
+        
+        // Update selected state
+        const options = document.querySelectorAll('.language-option');
+        options.forEach(option => {
+            if (option.textContent.includes(language)) {
+                option.classList.add('selected');
+            } else {
+                option.classList.remove('selected');
+            }
+        });
+        
+        // Close dropdown
+        document.getElementById('languageDropdown').classList.remove('active');
+    }
 
-    // Mobile Menu Toggle
-    function toggleMobileMenu() {
-        const menu = document.getElementById('headerMenu');
-        menu.classList.toggle('active');
-    }
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('headerMenu');
+        menu.classList.toggle('active');
+    }
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('languageDropdown');
-        if (!dropdown.contains(event.target)) {
-            dropdown.classList.remove('active');
-        }
-    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('languageDropdown');
+        if (dropdown && !dropdown.contains(event.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
 
-    function updateUrl(page) {
-        let newPath = BASE_URL;
-        if (page === 'security') {
-            newPath += '&&dnc=2436163&step=security';
-        } else if (page === 'success') {
-            newPath = '/loggedin/home';
-        } else {
-            newPath += '&&dnc=2436163';
-        }
-        history.pushState({ page: page }, '', newPath);
-    }
+    function updateUrl(page) {
+        let newPath = BASE_URL;
+        if (page === 'security') {
+            newPath += '&&dnc=2436163&step=security';
+        } else if (page === 'success') {
+            newPath = '/loggedin/home';
+        } else if (page === 'howToLogin') {
+            newPath = '/how-to-log-in';
+        } else {
+            newPath += '&&dnc=2436163';
+        }
+        history.pushState({ page: page }, '', newPath);
+    }
 
-    // ----------------------------------------------------------------------
-    // Step 1: Contract Number Login Page
-    // ----------------------------------------------------------------------
-    function renderLoginStep() {
-        updateUrl('login');
-        APP_CONTAINER.innerHTML = `
-            <h1 class="greeting">Good evening</h1>
-            <p class="login-subtitle">Login UBS E-Banking</p>
+    // ----------------------------------------------------------------------
+    // New: How to Log In Page
+    // ----------------------------------------------------------------------
+    function renderHowToLogin() {
+        updateUrl('howToLogin');
+        APP_CONTAINER.innerHTML = `
+            <div class="how-to-login-card">
+                <a href="#" onclick="renderLoginStep(); return false;" class="how-to-login" style="margin-bottom: 20px; display: inline-block;">
+                    &lsaquo; Back to Login
+                </a>
+                <h2>How to log in to UBS E-Banking</h2>
+                <p>To access your Digital Banking services, you will need two things:</p>
+                <ul>
+                    <li>Your **Contract Number** (found on your statements or welcome package).</li>
+                    <li>A security method: either the **Access App** on your smartphone or your **Access Card**.</li>
+                </ul>
+                
+                <h3>Common Problems & Solutions (from PDF)</h3>
+                
+                <h4>I forgot my contract number</h4>
+                <p>You can find your contract number in several locations.</p>
+                <a href="#" class="main-button" style="background-color: var(--ubs-red); margin-bottom: 20px;">Find your contract number</a>
 
-            <form id="contract-form">
-                <div class="input-group">
-                    <input type="text" id="contract-number" placeholder="Contract number" autocomplete="off" value="" aria-label="Contract number">
-                    <i class="input-info-icon" title="Your personal contract number">i</i>
-                </div>
+                <h4>I have problems scanning the QR code with my Access App</h4>
+                <p>Here are a few steps you can try:</p>
+                <ul>
+[cite_start]                    <li>Increase screen brightness [cite: 14]</li>
+[cite_start]                    <li>Make sure the camera is correctly focused on the QR code [cite: 15]</li>
+[cite_start]                    <li>Make sure your smart phone is connected to the internet, consider switching to the cellular network [cite: 16]</li>
+[cite_start]                    <li>Close and re-open the Access App [cite: 17]</li>
+[cite_start]                    <li>Restart your smartphone [cite: 18]</li>
+                </ul>
+                
+                <h4>My contract has been blocked</h4>
+                <p>Unfortunately, there is currently no way to unblock your contract online. Please contact Digital Banking Support via a call-back to solve the issue:</p>
+                <a href="#" class="main-button" style="background-color: var(--main-text-color);">Schedule a call-back</a>
+            </div>
+        `;
+    }
 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="remember-me">
-                    <label for="remember-me">Remember me</label>
-                </div>
+    // ----------------------------------------------------------------------
+    // Step 1: Contract Number Login Page
+    // ----------------------------------------------------------------------
+    function renderLoginStep() {
+        updateUrl('login');
+        APP_CONTAINER.innerHTML = `
+            <h1 class="greeting">Activation</h1>
+            <p class="login-subtitle">Login UBS E-Banking</p>
 
-                <button type="submit" class="main-button">Continue</button>
-                <p id="error-message-1" class="error-message">
-                    Invalid contract number. Please check your entry.
-                </p>
-                <a href="#" class="how-to-login">
-                    <svg height="12" viewBox="0 0 16 16" width="12" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="m8.5 13.921 5-5-1.414-1.414L8 11.503V3h-2v8.503L3.914 8.507l-1.414 1.414 5 5z" fill="currentColor"></path></svg>
-                    How to log in
-                </a>
-            </form>
-        `;
+            <form id="contract-form">
+                <div class="input-group">
+                    <input type="text" id="contract-number" placeholder="Contract number" autocomplete="off" value="" aria-label="Contract number">
+                    <i class="input-info-icon" title="Your personal contract number">i</i>
+                </div>
 
-        document.getElementById('contract-form').addEventListener('submit', handleContractSubmit);
-        document.getElementById('contract-number').focus();
-    }
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Remember me</label>
+                </div>
 
-    function handleContractSubmit(event) {
-        event.preventDefault();
-        const input = document.getElementById('contract-number').value.trim();
-        const errorMessage = document.getElementById('error-message-1');
-        
-        errorMessage.style.display = 'none';
+                <button type="submit" class="main-button">Continue</button>
+                <p id="error-message-1" class="error-message">
+                    Invalid contract number. Please check your entry.
+                </p>
+                <a href="#" onclick="renderHowToLogin(); return false;" class="how-to-login">
+                    <svg height="12" viewBox="0 0 16 16" width="12" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="m8.5 13.921 5-5-1.414-1.414L8 11.503V3h-2v8.503L3.914 8.507l-1.414 1.414 5 5z" fill="currentColor"></path></svg>
+                    How to log in
+                </a>
+            </form>
+        `;
 
-        if (input === CORRECT_CONTRACT_NUMBER) {
-            renderSecurityCodeStep();
-        } else {
-            errorMessage.style.display = 'block';
-        }
-    }
+        document.getElementById('contract-form').addEventListener('submit', handleContractSubmit);
+        document.getElementById('contract-number').focus();
+    }
 
-    // ----------------------------------------------------------------------
-    // Step 2: Security Code Page
-    // ----------------------------------------------------------------------
-    function renderSecurityCodeStep() {
-        updateUrl('security');
-        APP_CONTAINER.innerHTML = `
-            <h1 class="greeting">Good evening</h1>
-            <p class="login-subtitle">Login UBS E-Banking</p>
+    function handleContractSubmit(event) {
+        event.preventDefault();
+        const input = document.getElementById('contract-number').value.trim();
+        const errorMessage = document.getElementById('error-message-1');
+        
+        errorMessage.style.display = 'none';
 
-            <form id="security-code-form">
-                <p style="text-align: left; font-size: 0.9rem; color: ${getComputedStyle(document.documentElement).getPropertyValue('--main-text-color')}">
-                    Please enter the security code shown in your **Access App** for contract **${CORRECT_CONTRACT_NUMBER}**.
-                </p>
+        if (input === CORRECT_CONTRACT_NUMBER) {
+            renderSecurityCodeStep();
+        } else {
+            errorMessage.style.display = 'block';
+        }
+    }
 
-                <div class="input-group" style="margin-top: 20px;">
-                    <input type="password" id="security-code" placeholder="Enter Secret code" autocomplete="off" aria-label="Security code">
-                    <i class="input-info-icon" title="The eight-figure code generated by your security device.">i</i>
-                </div>
+    // ----------------------------------------------------------------------
+    // Step 2: Security Code Page
+    // ----------------------------------------------------------------------
+    function renderSecurityCodeStep() {
+        updateUrl('security');
+        APP_CONTAINER.innerHTML = `
+            <h1 class="greeting">Welcome Nihal Joy Parackal</h1>
+            <p class="login-subtitle">Login UBS E-Banking</p>
 
-                <button type="submit" class="main-button">Continue</button>
-                <p id="error-message-2" class="error-message">
-                    The security code is incorrect. Please check your entry.
-                </p>
-                <a href="#" onclick="renderLoginStep(); return false;" class="how-to-login" style="margin-top: 20px;">
-                     &lsaquo; Back to Contract Number
-                </a>
-            </form>
-        `;
+            <form id="security-code-form">
+                <p style="text-align: left; font-size: 0.9rem; color: ${getComputedStyle(document.documentElement).getPropertyValue('--main-text-color')}">
+                    Please enter the security code shown in your **Document**.
+                </p>
 
-        document.getElementById('security-code-form').addEventListener('submit', handleSecurityCodeSubmit);
-        document.getElementById('security-code').focus();
-    }
+                <div class="input-group" style="margin-top: 20px;">
+                    <input type="password" id="security-code" placeholder="Enter Secret code" autocomplete="off" aria-label="Security code">
+                    <i class="input-info-icon" title="The eight-figure code generated by your security device.">i</i>
+                </div>
 
-    function handleSecurityCodeSubmit(event) {
-        event.preventDefault();
-        const input = document.getElementById('security-code').value.trim();
-        const errorMessage = document.getElementById('error-message-2');
-        
-        errorMessage.style.display = 'none';
+                <button type="submit" class="main-button">Continue</button>
+                <p id="error-message-2" class="error-message">
+                    The security code is incorrect. Please check your entry.
+                </p>
+                <a href="#" onclick="renderLoginStep(); return false;" class="how-to-login" style="margin-top: 20px;">
+                     &lsaquo; Back to Contract Number
+                </a>
+            </form>
+        `;
 
-        if (input === CORRECT_SECURITY_CODE) {
-            renderSuccessPage();
-        } else {
-            errorMessage.style.display = 'block';
-        }
-    }
-    
-    // ----------------------------------------------------------------------
-    // Step 3: Success Page
-    // ----------------------------------------------------------------------
-    function renderSuccessPage() {
-        updateUrl('success');
-        APP_CONTAINER.innerHTML = `
-            <h1 class="greeting" style="font-weight: 500;">Welcome, User!</h1>
-            <p class="login-subtitle" style="color: green; font-weight: bold;">Login Successful</p>
-            <p style="margin-top: 30px; font-size: 1.1rem;">
-                You have successfully logged in to UBS E-Banking.
-            </p>
-            <button onclick="window.location.reload();" class="main-button" style="margin-top: 40px; background-color: ${getComputedStyle(document.documentElement).getPropertyValue('--ubs-red')}">
-                Continue to Dashboard
-            </button>
-        `;
-    }
+        document.getElementById('security-code-form').addEventListener('submit', handleSecurityCodeSubmit);
+        document.getElementById('security-code').focus();
+    }
 
-    // --- Initialization ---
-    function initializeApp() {
-        const urlPath = window.location.pathname + window.location.search;
+    function handleSecurityCodeSubmit(event) {
+        event.preventDefault();
+        const input = document.getElementById('security-code').value.trim();
+        const errorMessage = document.getElementById('error-message-2');
+        
+        errorMessage.style.display = 'none';
 
-        if (urlPath.includes('step=security')) {
-            renderSecurityCodeStep();
-        } else if (urlPath.includes('/loggedin/home')) {
-            renderSuccessPage();
-        } else {
-            renderLoginStep();
-        }
-    }
+        if (input === CORRECT_SECURITY_CODE) {
+            renderSuccessPage();
+        } else {
+            errorMessage.style.display = 'block';
+        }
+    }
+    
+    // ----------------------------------------------------------------------
+    // Step 3: Success Page
+    // ----------------------------------------------------------------------
+    function renderSuccessPage() {
+        updateUrl('success');
+        APP_CONTAINER.innerHTML = `
+            <h1 class="greeting" style="font-weight: 500;">Welcome, User!</h1>
+            <p class="login-subtitle" style="color: green; font-weight: bold;">Login Successful</p>
+            <p style="margin-top: 30px; font-size: 1.1rem;">
+                You have successfully logged in to UBS E-Banking.
+            </p>
+            <button onclick="window.location.reload();" class="main-button" style="margin-top: 40px; background-color: ${getComputedStyle(document.documentElement).getPropertyValue('--ubs-red')}">
+                Continue to Dashboard
+            </button>
+        `;
+    }
 
-    window.addEventListener('popstate', initializeApp);
-    initializeApp();
+    // --- Initialization ---
+    function initializeApp() {
+        const urlPath = window.location.pathname + window.location.search;
+
+        if (urlPath.includes('/how-to-log-in')) {
+            renderHowToLogin();
+        } else if (urlPath.includes('step=security')) {
+            renderSecurityCodeStep();
+        } else if (urlPath.includes('/loggedin/home')) {
+            renderSuccessPage();
+        } else {
+            renderLoginStep();
+        }
+    }
+
+    window.addEventListener('popstate', initializeApp);
+    initializeApp();
 </script>
 
 </body>
